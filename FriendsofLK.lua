@@ -383,7 +383,7 @@ SMODS.DeckSkin{
 				Jack = { atlas = 'folk_ClubsOne', pos = {x = 0, y = 0} },
 				Queen = { atlas = 'folk_ClubsOne', pos = {x = 1, y = 0} },
 				King = { atlas = 'folk_ClubsOne', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 0} }
+				Ace = { atlas = 'folk_ShieldAces', pos = {x = 2, y = 0} }
 			},
 			loc_txt = {
 				['en-us'] = "Low Contrast & Emblem"
@@ -414,7 +414,7 @@ SMODS.DeckSkin{
 				Jack = { atlas = 'folk_ClubsOneHC', pos = {x = 0, y = 0} },
 				Queen = { atlas = 'folk_ClubsOneHC', pos = {x = 1, y = 0} },
 				King = { atlas = 'folk_ClubsOneHC', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 1} }
+				Ace = { atlas = 'folk_ShieldAces', pos = {x = 2, y = 1} }
 			},
 			loc_txt = {
 				['en-us'] = "High Contrast & Emblem"
@@ -445,7 +445,7 @@ SMODS.DeckSkin{
 				Jack = { atlas = 'folk_ClubsOneEC', pos = {x = 0, y = 0} },
 				Queen = { atlas = 'folk_ClubsOneEC', pos = {x = 1, y = 0} },
 				King = { atlas = 'folk_ClubsOneEC', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 2} }
+				Ace = { atlas = 'folk_ShieldAces', pos = {x = 2, y = 2} }
 			},
 			loc_txt = {
 				['en-us'] = "Enhanced Contrast & Emblem"
@@ -479,7 +479,7 @@ SMODS.DeckSkin{
 				Jack = { atlas = 'folk_DiamondsOne', pos = {x = 0, y = 0} },
 				Queen = { atlas = 'folk_DiamondsOne', pos = {x = 1, y = 0} },
 				King = { atlas = 'folk_DiamondsOne', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 0} }
+				Ace = { atlas = 'folk_ShieldAces', pos = {x = 3, y = 0} }
 			},
 			loc_txt = {
 				['en-us'] = "Low Contrast & Emblem"
@@ -510,7 +510,7 @@ SMODS.DeckSkin{
 				Jack = { atlas = 'folk_DiamondsOneHC', pos = {x = 0, y = 0} },
 				Queen = { atlas = 'folk_DiamondsOneHC', pos = {x = 1, y = 0} },
 				King = { atlas = 'folk_DiamondsOneHC', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 1} }
+				Ace = { atlas = 'folk_ShieldAces', pos = {x = 3, y = 1} }
 			},
 			loc_txt = {
 				['en-us'] = "High Contrast & Emblem"
@@ -541,7 +541,7 @@ SMODS.DeckSkin{
 				Jack = { atlas = 'folk_DiamondsOneEC', pos = {x = 0, y = 0} },
 				Queen = { atlas = 'folk_DiamondsOneEC', pos = {x = 1, y = 0} },
 				King = { atlas = 'folk_DiamondsOneEC', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 2} }
+				Ace = { atlas = 'folk_ShieldAces', pos = {x = 3, y = 2} }
 			},
 			loc_txt = {
 				['en-us'] = "Enhanced Contrast & Emblem"
