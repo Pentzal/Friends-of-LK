@@ -553,7 +553,7 @@ SMODS.DeckSkin{
 -- Friends of LK Halberds Wave 1
 SMODS.DeckSkin{
 	key = "HalberdsOne",
-	suit = "Halberds",
+	suit = "bunc_Halberds",
 	loc_txt = {
 		['en-us'] = "Friends of LK"
 	},
@@ -618,7 +618,7 @@ SMODS.DeckSkin{
 -- Friends of LK Fleurons Wave 1
 SMODS.DeckSkin{
 	key = "FleuronsOne",
-	suit = "Fleurons",
+	suit = "bunc_Fleurons",
 	loc_txt = {
 		['en-us'] = "Friends of LK"
 	},
