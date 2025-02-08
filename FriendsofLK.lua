@@ -138,7 +138,7 @@ SMODS.DeckSkin{
 	key = "SpadesHalberds",
 	suit = "Spades",
 	loc_txt = {
-		['en-us'] = "Friends of LK"
+		['en-us'] = "Friends of LK (Halberds)"
 	},
 	palettes = {
 		{
@@ -298,7 +298,7 @@ SMODS.DeckSkin{
 	key = "HeartsFleurons",
 	suit = "Hearts",
 	loc_txt = {
-		['en-us'] = "Friends of LK"
+		['en-us'] = "Friends of LK (Fleurons)"
 	},
 	palettes = {
 		{
