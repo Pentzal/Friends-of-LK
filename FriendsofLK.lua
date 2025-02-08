@@ -570,7 +570,7 @@ SMODS.DeckSkin{
 		{
 			key = 'HalberdsOneAce',
 			ranks = faceAce,
-			atlas = 'bunco_cards',
+			atlas = 'bunc_bunco_cards',
 			pos_style = {
 				Jack = { atlas = 'folk_HalberdsOne', pos = {x = 0, y = 0} },
 				Queen = { atlas = 'folk_HalberdsOne', pos = {x = 1, y = 0} },
@@ -585,7 +585,7 @@ SMODS.DeckSkin{
 			key = 'HalberdsOneHC',
 			ranks = fullRanks,
 			display_ranks = face,
-			atlas = 'bunco_cards_hc',
+			atlas = 'bunc_bunco_cards_hc',
 			pos_style = {
 				fallback_style = 'deck',
 				Jack = { atlas = 'folk_HalberdsOneHC', pos = {x = 0, y = 0} },
@@ -600,7 +600,7 @@ SMODS.DeckSkin{
 			key = 'HalberdsOneHCAce',
 			ranks = fullRanks,
 			display_ranks = faceAce,
-			atlas = 'bunco_cards_hc',
+			atlas = 'bunc_bunco_cards_hc',
 			pos_style = {
 				fallback_style = 'deck',
 				Jack = { atlas = 'folk_HalberdsOneHC', pos = {x = 0, y = 0} },
@@ -635,7 +635,7 @@ SMODS.DeckSkin{
 		{
 			key = 'FleuronsOneAce',
 			ranks = faceAce,
-			atlas = 'bunco_cards',
+			atlas = 'bunc_bunco_cards',
 			pos_style = {
 				Jack = { atlas = 'folk_FleuronsOne', pos = {x = 0, y = 0} },
 				Queen = { atlas = 'folk_FleuronsOne', pos = {x = 1, y = 0} },
@@ -650,7 +650,7 @@ SMODS.DeckSkin{
 			key = 'FleuronsOneHC',
 			ranks = fullRanks,
 			display_ranks = face,
-			atlas = 'bunco_cards_hc',
+			atlas = 'bunc_bunco_cards_hc',
 			pos_style = {
 				fallback_style = 'deck',
 				Jack = { atlas = 'folk_FleuronsOneHC', pos = {x = 0, y = 0} },
@@ -665,7 +665,7 @@ SMODS.DeckSkin{
 			key = 'FleuronsOneHCAce',
 			ranks = fullRanks,
 			display_ranks = faceAce,
-			atlas = 'bunco_cards_hc',
+			atlas = 'bunc_bunco_cards_hc',
 			pos_style = {
 				fallback_style = 'deck',
 				Jack = { atlas = 'folk_FleuronsOneHC', pos = {x = 0, y = 0} },
