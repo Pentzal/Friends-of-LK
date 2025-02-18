@@ -10,6 +10,12 @@ local fullRanks = {"Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5"
 local faceAce = {"Ace", "King", "Queen", "Jack"}
 local face = {"King", "Queen", "Jack"}
 
+local buncLoaded = SMODS.Mods.Bunco and SMODS.Mods.Bunco.can_load
+
+local suitColor = { HEX("3C4368"), HEX("F03464"), HEX("235955"), HEX("F06B3F"), HEX("D6901A"), HEX("6E3C63") }
+local suitColorHC = { HEX("374649"), HEX("F83B2F"), HEX("007BC7"), HEX("FFA300"), HEX("DBB529"), HEX("993283") }
+local suitColorEC = { HEX("5D55A6"), HEX("EE151B"), HEX("197F77"), HEX("E56B10") }
+
 SMODS.Atlas{ key = 'SpadesOne', px = 71, py = 95, path = 'Spades/Wave1.png' }
 SMODS.Atlas{ key = 'SpadesOneHC', px = 71, py = 95, path = 'Spades/Wave1H.png' }
 SMODS.Atlas{ key = 'SpadesOneEC', px = 71, py = 95, path = 'Spades/Wave1E.png' }
@@ -38,7 +44,7 @@ SMODS.Atlas{ key = 'FleuronsOneHC', px = 71, py = 95, path = 'Exotic/FleuronWave
 SMODS.Atlas{ key = 'ShieldAces', px = 71, py = 95, path = 'ShieldAces.png' }
 SMODS.Atlas{ key = 'WandAces', px = 71, py = 95, path = 'Exotic/WandAces.png' }
 
--- Friends of LK Spades Wave 1
+-- Spades Wave 1
 SMODS.DeckSkin{
 	key = "SpadesOne",
 	suit = "Spades",
@@ -47,158 +53,131 @@ SMODS.DeckSkin{
 	},
 	palettes = {
 		{
-			key = 'SpadesOne',
+			key = 'lc',
 			ranks = face,
 			atlas = 'folk_SpadesOne',
 			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "Low Contrast Colors"
 			},
+			colour = suitColor[1]
 		},
 		{
-			key = 'SpadesOneAce',
+			key = 'lcAce',
 			ranks = faceAce,
-			atlas = 'cards_1',
+			atlas = 'folk_SpadesOne',
 			pos_style = {
-				Jack = { atlas = 'folk_SpadesOne', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_SpadesOne', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_SpadesOne', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 0} }
 			},
 			loc_txt = {
 				['en-us'] = "Low Contrast & Emblem"
 			},
+			colour = suitColor[1]
 		},
 		{
-			key = 'SpadesOneHC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_SpadesOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_SpadesOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_SpadesOneHC', pos = {x = 2, y = 0} }
-			},
+			key = 'hc',
+			ranks = face,
+			atlas = 'folk_SpadesOneHC',
+			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "High Contrast Colors"
 			},
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 3, y = 1 }
+			},
+			hc_default = true,
+			colour = suitColorHC[1]
 		},
 		{
-			key = 'SpadesOneHCAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'cards_2',
+			key = 'hcAce',
+			ranks = faceAce,
+			atlas = 'folk_SpadesOneHC',
 			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_SpadesOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_SpadesOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_SpadesOneHC', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 1} }
 			},
 			loc_txt = {
 				['en-us'] = "High Contrast & Emblem"
 			},
-		},
-		{
-			key = 'SpadesOneEC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_SpadesOneEC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_SpadesOneEC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_SpadesOneEC', pos = {x = 2, y = 0} }
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 3, y = 1 }
 			},
-			loc_txt = {
-				['en-us'] = "Enhanced Contrast Colors"
-			},
-		},
-		{
-			key = 'SpadesOneECAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_SpadesOneEC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_SpadesOneEC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_SpadesOneEC', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 2} }
-			},
-			loc_txt = {
-				['en-us'] = "Enhanced Contrast & Emblem"
-			},
-		},
-	},
+			hc_default = true,
+			colour = suitColorHC[1]
+		}
+	}
 }
--- Friends of LK Spades Wave 1 (Halberd)
+-- Spades (Halberds)
 SMODS.DeckSkin{
 	key = "SpadesHalberds",
 	suit = "Spades",
 	loc_txt = {
-		['en-us'] = "Friends of LK (Halberds)"
+		['en-us'] = "Friends of LK (Exotic)"
 	},
 	palettes = {
 		{
-			key = 'SpadesHalberds',
+			key = 'lc',
 			ranks = face,
 			atlas = 'folk_SpadesHalberds',
 			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "Low Contrast Colors"
 			},
+			colour = suitColor[1]
 		},
 		{
-			key = 'SpadesHalberdsAce',
+			key = 'lcAce',
 			ranks = faceAce,
-			atlas = 'cards_1',
+			atlas = 'folk_SpadesHalberds',
 			pos_style = {
-				Jack = { atlas = 'folk_SpadesHalberds', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_SpadesHalberds', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_SpadesHalberds', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 0} }
 			},
 			loc_txt = {
 				['en-us'] = "Low Contrast & Emblem"
 			},
+			colour = suitColor[1]
 		},
 		{
-			key = 'SpadesHalberdsHC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_SpadesHalberdsHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_SpadesHalberdsHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_SpadesHalberdsHC', pos = {x = 2, y = 0} }
-			},
+			key = 'hc',
+			ranks = face,
+			atlas = 'folk_SpadesHalberdsHC',
+			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "High Contrast Colors"
 			},
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 3, y = 1 }
+			},
+			hc_default = true,
+			colour = suitColorHC[1]
 		},
 		{
-			key = 'SpadesHalberdsHCAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'cards_2',
+			key = 'hcAce',
+			ranks = faceAce,
+			atlas = 'folk_SpadesHalberdsHC',
 			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_SpadesHalberdsHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_SpadesHalberdsHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_SpadesHalberdsHC', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 1} }
 			},
 			loc_txt = {
 				['en-us'] = "High Contrast & Emblem"
 			},
-		},
-	},
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 3, y = 1 }
+			},
+			hc_default = true,
+			colour = suitColorHC[1]
+		}
+	}
 }
 
--- Friends of LK Hearts Wave 1
+-- Hearts Wave 1
 SMODS.DeckSkin{
 	key = "HeartsOne",
 	suit = "Hearts",
@@ -207,158 +186,131 @@ SMODS.DeckSkin{
 	},
 	palettes = {
 		{
-			key = 'HeartsOne',
+			key = 'lc',
 			ranks = face,
 			atlas = 'folk_HeartsOne',
 			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "Low Contrast Colors"
 			},
+			colour = suitColor[2]
 		},
 		{
-			key = 'HeartsOneAce',
+			key = 'lcAce',
 			ranks = faceAce,
-			atlas = 'cards_1',
+			atlas = 'folk_HeartsOne',
 			pos_style = {
-				Jack = { atlas = 'folk_HeartsOne', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HeartsOne', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HeartsOne', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 1, y = 0} }
 			},
 			loc_txt = {
 				['en-us'] = "Low Contrast & Emblem"
 			},
+			colour = suitColor[2]
 		},
 		{
-			key = 'HeartsOneHC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_HeartsOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HeartsOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HeartsOneHC', pos = {x = 2, y = 0} }
-			},
+			key = 'hc',
+			ranks = face,
+			atlas = 'folk_HeartsOneHC',
+			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "High Contrast Colors"
 			},
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 0, y = 1 }
+			},
+			hc_default = true,
+			colour = suitColorHC[2]
 		},
 		{
-			key = 'HeartsOneHCAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'cards_2',
+			key = 'hcAce',
+			ranks = faceAce,
+			atlas = 'folk_HeartsOneHC',
 			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_HeartsOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HeartsOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HeartsOneHC', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 1, y = 1} }
 			},
 			loc_txt = {
 				['en-us'] = "High Contrast & Emblem"
 			},
-		},
-		{
-			key = 'HeartsOneEC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_HeartsOneEC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HeartsOneEC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HeartsOneEC', pos = {x = 2, y = 0} }
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 0, y = 1 }
 			},
-			loc_txt = {
-				['en-us'] = "Enhanced Contrast Colors"
-			},
-		},
-		{
-			key = 'HeartsOneECAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_HeartsOneEC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HeartsOneEC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HeartsOneEC', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_ShieldAces', pos = {x = 1, y = 2} }
-			},
-			loc_txt = {
-				['en-us'] = "Enhanced Contrast & Emblem"
-			},
-		},
-	},
+			hc_default = true,
+			colour = suitColorHC[2]
+		}
+	}
 }
--- Friends of LK Hearts Wave 1 (Fleuron)
+-- Hearts (Fleurons)
 SMODS.DeckSkin{
 	key = "HeartsFleurons",
 	suit = "Hearts",
 	loc_txt = {
-		['en-us'] = "Friends of LK (Fleurons)"
+		['en-us'] = "Friends of LK (Exotic)"
 	},
 	palettes = {
 		{
-			key = 'HeartsFleurons',
+			key = 'lc',
 			ranks = face,
 			atlas = 'folk_HeartsFleurons',
 			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "Low Contrast Colors"
 			},
+			colour = suitColor[2]
 		},
 		{
-			key = 'HeartsFleuronsAce',
+			key = 'lcAce',
 			ranks = faceAce,
-			atlas = 'cards_1',
+			atlas = 'folk_HeartsFleurons',
 			pos_style = {
-				Jack = { atlas = 'folk_HeartsFleurons', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HeartsFleurons', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HeartsFleurons', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 1, y = 0} }
 			},
 			loc_txt = {
 				['en-us'] = "Low Contrast & Emblem"
 			},
+			colour = suitColor[2]
 		},
 		{
-			key = 'HeartsFleuronsHC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_HeartsFleuronsHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HeartsFleuronsHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HeartsFleuronsHC', pos = {x = 2, y = 0} }
-			},
+			key = 'hc',
+			ranks = face,
+			atlas = 'folk_HeartsFleuronsHC',
+			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "High Contrast Colors"
 			},
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 0, y = 1 }
+			},
+			hc_default = true,
+			colour = suitColorHC[2]
 		},
 		{
-			key = 'HeartsFleuronsHCAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'cards_2',
+			key = 'hcAce',
+			ranks = faceAce,
+			atlas = 'folk_HeartsFleuronsHC',
 			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_HeartsFleuronsHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HeartsFleuronsHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HeartsFleuronsHC', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 1, y = 1} }
 			},
 			loc_txt = {
 				['en-us'] = "High Contrast & Emblem"
 			},
-		},
-	},
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 0, y = 1 }
+			},
+			hc_default = true,
+			colour = suitColorHC[2]
+		}
+	}
 }
 
--- Friends of LK Clubs Wave 1
+-- Clubs Wave 1
 SMODS.DeckSkin{
 	key = "ClubsOne",
 	suit = "Clubs",
@@ -367,94 +319,65 @@ SMODS.DeckSkin{
 	},
 	palettes = {
 		{
-			key = 'ClubsOne',
+			key = 'lc',
 			ranks = face,
 			atlas = 'folk_ClubsOne',
 			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "Low Contrast Colors"
 			},
+			colour = suitColor[3]
 		},
 		{
-			key = 'ClubsOneAce',
+			key = 'lcAce',
 			ranks = faceAce,
-			atlas = 'cards_1',
+			atlas = 'folk_ClubsOne',
 			pos_style = {
-				Jack = { atlas = 'folk_ClubsOne', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_ClubsOne', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_ClubsOne', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 2, y = 0} }
 			},
 			loc_txt = {
 				['en-us'] = "Low Contrast & Emblem"
 			},
+			colour = suitColor[3]
 		},
 		{
-			key = 'ClubsOneHC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_ClubsOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_ClubsOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_ClubsOneHC', pos = {x = 2, y = 0} }
-			},
+			key = 'hc',
+			ranks = face,
+			atlas = 'folk_ClubsOneHC',
+			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "High Contrast Colors"
 			},
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 2, y = 1 }
+			},
+			hc_default = true,
+			colour = suitColorHC[3]
 		},
 		{
-			key = 'ClubsOneHCAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'cards_2',
+			key = 'hcAce',
+			ranks = faceAce,
+			atlas = 'folk_ClubsOneHC',
 			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_ClubsOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_ClubsOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_ClubsOneHC', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 2, y = 1} }
 			},
 			loc_txt = {
 				['en-us'] = "High Contrast & Emblem"
 			},
-		},
-		{
-			key = 'ClubsOneEC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_ClubsOneEC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_ClubsOneEC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_ClubsOneEC', pos = {x = 2, y = 0} }
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 2, y = 1 }
 			},
-			loc_txt = {
-				['en-us'] = "Enhanced Contrast Colors"
-			},
-		},
-		{
-			key = 'ClubsOneECAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_ClubsOneEC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_ClubsOneEC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_ClubsOneEC', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_ShieldAces', pos = {x = 2, y = 2} }
-			},
-			loc_txt = {
-				['en-us'] = "Enhanced Contrast & Emblem"
-			},
-		},
-	},
+			hc_default = true,
+			colour = suitColorHC[3]
+		}
+	}
 }
 
--- Friends of LK Diamonds Wave 1
+-- Diamonds Wave 1
 SMODS.DeckSkin{
 	key = "DiamondsOne",
 	suit = "Diamonds",
@@ -463,222 +386,358 @@ SMODS.DeckSkin{
 	},
 	palettes = {
 		{
-			key = 'DiamondsOne',
+			key = 'lc',
 			ranks = face,
 			atlas = 'folk_DiamondsOne',
 			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "Low Contrast Colors"
 			},
+			colour = suitColor[4]
 		},
 		{
-			key = 'DiamondsOneAce',
+			key = 'lcAce',
 			ranks = faceAce,
-			atlas = 'cards_1',
+			atlas = 'folk_DiamondsOne',
 			pos_style = {
-				Jack = { atlas = 'folk_DiamondsOne', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_DiamondsOne', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_DiamondsOne', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 3, y = 0} }
 			},
 			loc_txt = {
 				['en-us'] = "Low Contrast & Emblem"
 			},
+			colour = suitColor[4]
 		},
 		{
-			key = 'DiamondsOneHC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_DiamondsOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_DiamondsOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_DiamondsOneHC', pos = {x = 2, y = 0} }
-			},
+			key = 'hc',
+			ranks = face,
+			atlas = 'folk_DiamondsOneHC',
+			pos_style = 'collab',
 			loc_txt = {
 				['en-us'] = "High Contrast Colors"
 			},
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 1, y = 1 }
+			},
+			hc_default = true,
+			colour = suitColorHC[4]
 		},
 		{
-			key = 'DiamondsOneHCAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'cards_2',
+			key = 'hcAce',
+			ranks = faceAce,
+			atlas = 'folk_DiamondsOneHC',
 			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_DiamondsOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_DiamondsOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_DiamondsOneHC', pos = {x = 2, y = 0} },
+				fallback_style = 'collab',
 				Ace = { atlas = 'folk_ShieldAces', pos = {x = 3, y = 1} }
 			},
 			loc_txt = {
 				['en-us'] = "High Contrast & Emblem"
 			},
-		},
-		{
-			key = 'DiamondsOneEC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_DiamondsOneEC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_DiamondsOneEC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_DiamondsOneEC', pos = {x = 2, y = 0} }
+			suit_icon = {
+				atlas = 'ui_2',
+				pos = { x = 1, y = 1 }
 			},
-			loc_txt = {
-				['en-us'] = "Enhanced Contrast Colors"
-			},
-		},
-		{
-			key = 'DiamondsOneECAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'cards_2',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_DiamondsOneEC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_DiamondsOneEC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_DiamondsOneEC', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_ShieldAces', pos = {x = 3, y = 2} }
-			},
-			loc_txt = {
-				['en-us'] = "Enhanced Contrast & Emblem"
-			},
-		},
-	},
+			hc_default = true,
+			colour = suitColorHC[4]
+		}
+	}
 }
+---- BUNCO COMPAT
+if buncLoaded then
+	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['folk_SpadesOne'], -- Spades
+	{	key = 'recast_contrast',
+		ranks = fullRanks,
+		display_ranks = face,
+		atlas = 'bunc_bunco_resprites_enhanced_contrast',
+		pos_style = {
+			fallback_style = 'deck',
+			Jack = { atlas = 'folk_SpadesOneEC', pos = {x = 0, y = 0} },
+			Queen = { atlas = 'folk_SpadesOneEC', pos = {x = 1, y = 0} },
+			King = { atlas = 'folk_SpadesOneEC', pos = {x = 2, y = 0} },
+		},
+		loc_txt = {
+			['en-us'] = "Recast Contrast Colors"
+		},
+		suit_icon = {
+			atlas = 'bunc_bunco_resprites_enhanced_contrast_ui'
+		},
+		colour = suitColorEC[1]
+	})
+	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['folk_SpadesOne'], -- Spades (Ace)
+	{	key = 'recast_contrast_ace',
+		ranks = fullRanks,
+		display_ranks = faceAce,
+		atlas = 'bunc_bunco_resprites_enhanced_contrast',
+		pos_style = {
+			fallback_style = 'deck',
+			Jack = { atlas = 'folk_SpadesOneEC', pos = {x = 0, y = 0} },
+			Queen = { atlas = 'folk_SpadesOneEC', pos = {x = 1, y = 0} },
+			King = { atlas = 'folk_SpadesOneEC', pos = {x = 2, y = 0} },
+			Ace = { atlas = 'folk_ShieldAces', pos = {x = 0, y = 2} }
+		},
+		loc_txt = {
+			['en-us'] = "Recast Contrast & Emblem"
+		},
+		suit_icon = {
+			atlas = 'bunc_bunco_resprites_enhanced_contrast_ui'
+		},
+		colour = suitColorEC[1]
+	})
 
--- Friends of LK Halberds Wave 1
-SMODS.DeckSkin{
-	key = "HalberdsOne",
-	suit = "bunc_Halberds",
-	loc_txt = {
-		['en-us'] = "Friends of LK"
-	},
-	palettes = {
-		{
-			key = 'HalberdsOne',
-			ranks = face,
-			atlas = 'folk_HalberdsOne',
-			pos_style = 'collab',
-			loc_txt = {
-				['en-us'] = "Low Contrast Colors"
-			},
+	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['folk_HeartsOne'], -- Hearts
+	{	key = 'recast_contrast',
+		ranks = fullRanks,
+		display_ranks = face,
+		atlas = 'bunc_bunco_resprites_enhanced_contrast',
+		pos_style = {
+			fallback_style = 'deck',
+			Jack = { atlas = 'folk_HeartsOneEC', pos = {x = 0, y = 0} },
+			Queen = { atlas = 'folk_HeartsOneEC', pos = {x = 1, y = 0} },
+			King = { atlas = 'folk_HeartsOneEC', pos = {x = 2, y = 0} },
 		},
-		{
-			key = 'HalberdsOneAce',
-			ranks = faceAce,
-			atlas = 'bunc_bunco_cards',
-			pos_style = {
-				Jack = { atlas = 'folk_HalberdsOne', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HalberdsOne', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HalberdsOne', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_WandAces', pos = {x = 1, y = 0} }
-			},
-			loc_txt = {
-				['en-us'] = "Low Contrast & Emblem"
-			},
+		loc_txt = {
+			['en-us'] = "Recast Contrast Colors"
 		},
-		{
-			key = 'HalberdsOneHC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'bunc_bunco_cards_hc',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_HalberdsOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HalberdsOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HalberdsOneHC', pos = {x = 2, y = 0} }
-			},
-			loc_txt = {
-				['en-us'] = "High Contrast Colors"
-			},
+		suit_icon = {
+			atlas = 'bunc_bunco_resprites_enhanced_contrast_ui'
 		},
-		{
-			key = 'HalberdsOneHCAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'bunc_bunco_cards_hc',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_HalberdsOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_HalberdsOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_HalberdsOneHC', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_WandAces', pos = {x = 1, y = 1} }
-			},
-			loc_txt = {
-				['en-us'] = "High Contrast & Emblem"
-			},
+		colour = suitColorEC[2]
+	})
+	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['folk_HeartsOne'], -- Hearts (Ace)
+	{	key = 'recast_contrast_ace',
+		ranks = fullRanks,
+		display_ranks = faceAce,
+		atlas = 'bunc_bunco_resprites_enhanced_contrast',
+		pos_style = {
+			fallback_style = 'deck',
+			Jack = { atlas = 'folk_HeartsOneEC', pos = {x = 0, y = 0} },
+			Queen = { atlas = 'folk_HeartsOneEC', pos = {x = 1, y = 0} },
+			King = { atlas = 'folk_HeartsOneEC', pos = {x = 2, y = 0} },
+			Ace = { atlas = 'folk_ShieldAces', pos = {x = 1, y = 2} }
 		},
-	},
-}
+		loc_txt = {
+			['en-us'] = "Recast Contrast & Emblem"
+		},
+		suit_icon = {
+			atlas = 'bunc_bunco_resprites_enhanced_contrast_ui'
+		},
+		colour = suitColorEC[2]
+	})
 
--- Friends of LK Fleurons Wave 1
-SMODS.DeckSkin{
-	key = "FleuronsOne",
-	suit = "bunc_Fleurons",
-	loc_txt = {
-		['en-us'] = "Friends of LK"
-	},
-	palettes = {
-		{
-			key = 'FleuronsOne',
-			ranks = face,
-			atlas = 'folk_FleuronsOne',
-			pos_style = 'collab',
-			loc_txt = {
-				['en-us'] = "Low Contrast Colors"
-			},
+	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['folk_ClubsOne'], -- Clubs
+	{	key = 'recast_contrast',
+		ranks = fullRanks,
+		display_ranks = face,
+		atlas = 'bunc_bunco_resprites_enhanced_contrast',
+		pos_style = {
+			fallback_style = 'deck',
+			Jack = { atlas = 'folk_ClubsOneEC', pos = {x = 0, y = 0} },
+			Queen = { atlas = 'folk_ClubsOneEC', pos = {x = 1, y = 0} },
+			King = { atlas = 'folk_ClubsOneEC', pos = {x = 2, y = 0} },
 		},
-		{
-			key = 'FleuronsOneAce',
-			ranks = faceAce,
-			atlas = 'bunc_bunco_cards',
-			pos_style = {
-				Jack = { atlas = 'folk_FleuronsOne', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_FleuronsOne', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_FleuronsOne', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_WandAces', pos = {x = 0, y = 0} }
-			},
-			loc_txt = {
-				['en-us'] = "Low Contrast & Emblem"
-			},
+		loc_txt = {
+			['en-us'] = "Recast Contrast Colors"
 		},
-		{
-			key = 'FleuronsOneHC',
-			ranks = fullRanks,
-			display_ranks = face,
-			atlas = 'bunc_bunco_cards_hc',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_FleuronsOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_FleuronsOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_FleuronsOneHC', pos = {x = 2, y = 0} }
-			},
-			loc_txt = {
-				['en-us'] = "High Contrast Colors"
-			},
+		suit_icon = {
+			atlas = 'bunc_bunco_resprites_enhanced_contrast_ui'
 		},
-		{
-			key = 'FleuronsOneHCAce',
-			ranks = fullRanks,
-			display_ranks = faceAce,
-			atlas = 'bunc_bunco_cards_hc',
-			pos_style = {
-				fallback_style = 'deck',
-				Jack = { atlas = 'folk_FleuronsOneHC', pos = {x = 0, y = 0} },
-				Queen = { atlas = 'folk_FleuronsOneHC', pos = {x = 1, y = 0} },
-				King = { atlas = 'folk_FleuronsOneHC', pos = {x = 2, y = 0} },
-				Ace = { atlas = 'folk_WandAces', pos = {x = 0, y = 1} }
-			},
-			loc_txt = {
-				['en-us'] = "High Contrast & Emblem"
-			},
+		colour = suitColorEC[3]
+	})
+	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['folk_ClubsOne'], -- Clubs (Ace)
+	{
+		key = 'recast_contrast_ace',
+		ranks = fullRanks,
+		display_ranks = faceAce,
+		atlas = 'bunc_bunco_resprites_enhanced_contrast',
+		pos_style = {
+			fallback_style = 'deck',
+			Jack = { atlas = 'folk_ClubsOneEC', pos = {x = 0, y = 0} },
+			Queen = { atlas = 'folk_ClubsOneEC', pos = {x = 1, y = 0} },
+			King = { atlas = 'folk_ClubsOneEC', pos = {x = 2, y = 0} },
+			Ace = { atlas = 'folk_ShieldAces', pos = {x = 2, y = 2} }
 		},
-	},
-}
+		loc_txt = {
+			['en-us'] = "Recast Contrast & Emblem"
+		},
+		suit_icon = {
+			atlas = 'bunc_bunco_resprites_enhanced_contrast_ui'
+		},
+		colour = suitColorEC[3]
+	})
+
+	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['folk_DiamondsOne'], -- Diamonds
+	{ 	key = 'recast_contrast',
+		ranks = fullRanks,
+		display_ranks = face,
+		atlas = 'bunc_bunco_resprites_enhanced_contrast',
+		pos_style = {
+			fallback_style = 'deck',
+			Jack = { atlas = 'folk_DiamondsOneEC', pos = {x = 0, y = 0} },
+			Queen = { atlas = 'folk_DiamondsOneEC', pos = {x = 1, y = 0} },
+			King = { atlas = 'folk_DiamondsOneEC', pos = {x = 2, y = 0} },
+		},
+		loc_txt = {
+			['en-us'] = "Recast Contrast Colors"
+		},
+		suit_icon = {
+			atlas = 'bunc_bunco_resprites_enhanced_contrast_ui'
+		},
+		colour = suitColorEC[4]
+	})
+	SMODS.DeckSkin.add_palette(SMODS.DeckSkins['folk_DiamondsOne'], -- Diamonds (Ace)
+	{	key = 'recast_contrast_ace',
+		ranks = fullRanks,
+		display_ranks = faceAce,
+		atlas = 'bunc_bunco_resprites_enhanced_contrast',
+		pos_style = {
+			fallback_style = 'deck',
+			Jack = { atlas = 'folk_DiamondsOneEC', pos = {x = 0, y = 0} },
+			Queen = { atlas = 'folk_DiamondsOneEC', pos = {x = 1, y = 0} },
+			King = { atlas = 'folk_DiamondsOneEC', pos = {x = 2, y = 0} },
+			Ace = { atlas = 'folk_ShieldAces', pos = {x = 3, y = 2} }
+		},
+		loc_txt = {
+			['en-us'] = "Recast Contrast & Emblem"
+		},
+		suit_icon = {
+			atlas = 'bunc_bunco_resprites_enhanced_contrast_ui'
+		},
+		colour = suitColorEC[4]
+	})
+
+	SMODS.DeckSkin{ -- Fleurons
+		key = "FleuronsOne",
+		suit = "bunc_Fleurons",
+		loc_txt = {
+			['en-us'] = "Friends of LK"
+		},
+		palettes = {
+			{
+				key = 'lc',
+				ranks = face,
+				atlas = 'folk_FleuronsOne',
+				pos_style = 'collab',
+				loc_txt = {
+					['en-us'] = "Low Contrast Colors"
+				},
+				colour = suitColor[5]
+			},
+			{
+				key = 'lcAce',
+				ranks = faceAce,
+				atlas = 'folk_FleuronsOne',
+				pos_style = {
+					fallback_style = 'collab',
+					Ace = { atlas = 'folk_WandAces', pos = {x = 0, y = 0} }
+				},
+				loc_txt = {
+					['en-us'] = "Low Contrast & Emblem"
+				},
+				suit_icon = {
+					atlas = 'bunc_bunco_suits',
+					pos = { x = 0, y = 0 }
+				},
+				colour = suitColor[5]
+			},
+			{
+				key = 'hc',
+				ranks = face,
+				atlas = 'folk_FleuronsOneHC',
+				pos_style = 'collab',
+				loc_txt = {
+					['en-us'] = "High Contrast Colors"
+				},
+				hc_default = true,
+				colour = suitColorHC[5]
+			},
+			{
+				key = 'hcAce',
+				ranks = faceAce,
+				atlas = 'folk_FleuronsOneHC',
+				pos_style = {
+					fallback_style = 'collab',
+					Ace = { atlas = 'folk_WandAces', pos = {x = 0, y = 1} }
+				},
+				loc_txt = {
+					['en-us'] = "High Contrast & Emblem"
+				},
+				suit_icon = {
+					atlas = 'bunc_bunco_suits_hc',
+					pos = { x = 0, y = 0 }
+				},
+				hc_default = true,
+				colour = suitColorHC[5]
+			}
+		}
+	}
+
+	SMODS.DeckSkin{ -- Halberds
+		key = "HalberdsOne",
+		suit = "bunc_Halberds",
+		loc_txt = {
+			['en-us'] = "Friends of LK"
+		},
+		palettes = {
+			{
+				key = 'lc',
+				ranks = face,
+				atlas = 'folk_HalberdsOne',
+				pos_style = 'collab',
+				loc_txt = {
+					['en-us'] = "Low Contrast Colors"
+				},
+				colour = suitColor[6]
+			},
+			{
+				key = 'lcAce',
+				ranks = faceAce,
+				atlas = 'folk_HalberdsOne',
+				pos_style = {
+					fallback_style = 'collab',
+					Ace = { atlas = 'folk_WandAces', pos = {x = 1, y = 0} }
+				},
+				loc_txt = {
+					['en-us'] = "Low Contrast & Emblem"
+				},
+				suit_icon = {
+					atlas = 'bunc_bunco_suits',
+					pos = { x = 1, y = 0 }
+				},
+				colour = suitColor[6]
+			},
+			{
+				key = 'hc',
+				ranks = face,
+				atlas = 'folk_HalberdsOneHC',
+				pos_style = 'collab',
+				loc_txt = {
+					['en-us'] = "High Contrast Colors"
+				},
+				hc_default = true,
+				colour = suitColorHC[6]
+			},
+			{
+				key = 'hcAce',
+				ranks = faceAce,
+				atlas = 'folk_HalberdsOneHC',
+				pos_style = {
+					fallback_style = 'collab',
+					Ace = { atlas = 'folk_WandAces', pos = {x = 1, y = 1} }
+				},
+				loc_txt = {
+					['en-us'] = "High Contrast & Emblem"
+				},
+				suit_icon = {
+					atlas = 'bunc_bunco_suits_hc',
+					pos = { x = 1, y = 0 }
+				},
+				hc_default = true,
+				colour = suitColorHC[6]
+			}
+		}
+	}
+end
 ----------------------------------------------
 ------------MOD CODE END----------------------
 ----------------------------------------------
