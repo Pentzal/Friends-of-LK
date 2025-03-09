@@ -1,0 +1,44 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = 'if self.debuff then return 0 end'
+position = 'after'
+match_indent = true
+payload = '''
+    if self.base.value == 'Bro' then
+        return self.ability.mult
+    end
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''functions/common_events.lua'''
+pattern = '''
+if specific_vars.nominal_chips then
+    localize{type = 'other', key = 'card_chips', nodes = desc_nodes, vars = {specific_vars.nominal_chips}}
+'''
+position = 'after'
+match_indent = true
+payload = '''
+elseif specific_vars.value == 'folk_Bro' then
+    localize{type = 'other', key = 'bro_mult', nodes = desc_nodes, vars = {2}}
+'''
+
+[[patches]]
+[patches.pattern]
+target = '''functions/common_events.lua'''
+pattern = '''
+if specific_vars and _c.name ~= 'Stone Card' and specific_vars.nominal_chips then
+    localize{type = 'other', key = 'card_chips', nodes = desc_nodes, vars = {specific_vars.nominal_chips}}
+'''
+position = 'after'
+match_indent = true
+payload = '''
+elseif specific_vars and _c.name ~= 'Stone Card' and specific_vars.value == 'folk_Bro' then
+    localize{type = 'other', key = 'bro_mult', nodes = desc_nodes, vars = {2}}
+'''

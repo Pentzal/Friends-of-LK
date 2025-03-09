@@ -4,6 +4,7 @@
 --- PREFIX: folk
 --- MOD_AUTHOR: [Pentzal]
 --- MOD_DESCRIPTION: Adds new options in Customise Deck based on the show "C.R.U.S.A.D.E."! Also features special Bunco compatibility!
+--- BADGE_COLOR: 00CC00
 ----------------------------------------------
 ------------MOD CODE -------------------------
 local fullRanks = {"Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"}
@@ -43,6 +44,10 @@ SMODS.Atlas{ key = 'FleuronsOneHC', px = 71, py = 95, path = 'Exotic/FleuronWave
 
 SMODS.Atlas{ key = 'ShieldAces', px = 71, py = 95, path = 'ShieldAces.png' }
 SMODS.Atlas{ key = 'WandAces', px = 71, py = 95, path = 'Exotic/WandAces.png' }
+
+SMODS.Atlas{ key = 'Bros', px = 71, py = 95, path = 'Bros.png' }
+SMODS.Atlas{ key = 'Councillor', px = 71, py = 95, path = 'Councillor.png' }
+SMODS.Atlas{ key = 'Decks', px = 71, py = 95, path = 'Decks.png' }
 
 -- Spades Wave 1
 SMODS.DeckSkin{
@@ -738,6 +743,122 @@ if buncLoaded then
 		}
 	}
 end
+
+local cgcm = Card.get_chip_mult
+function Card:get_chip_mult()
+  local ret = cgcm(self)
+  if not self.debuff and self.base.value == 'folk_Bro' and self.ability.effect ~= "Stone Card" then
+    ret = ret + 2 -- there's ways to unhardcode this like putting mult in the base table, might do that on smods' end
+  end
+  return ret
+end
+
+local function folk_rankCheck(self, args)
+	if args and args.initial_deck then
+        return false
+    end
+	return folk_getPoolRankFlagEnable(self.key)
+end
+
+function folk_setPoolRankFlagEnable(rank, isEnable)
+	if not G.GAME or G.GAME.pool_flags[rank] == isEnable then return end
+	
+	G.GAME.pool_flags[rank] = isEnable
+end
+function folk_getPoolRankFlagEnable(rank)
+	return (G.GAME and G.GAME.pool_flags[rank] or false)
+end
+
+SMODS.Rank{
+	hc_atlas = 'folk_Bros',
+	lc_atlas = 'folk_Bros',
+	hidden = true,
+
+	key = 'Bro',
+	card_key = 'B',
+	pos = { x = 0 },
+	nominal = 0,
+	face_nominal = 10.05,
+
+	face = true,
+	loc_vars = function(self, info_queue, card)
+		return { vars = {self.get_chip_mult} }
+	end,
+	next = { 'Jack' },
+	prev = { '9' },
+	shorthand = 'B',
+	suit_map = { Spades = 0, Hearts = 1, Clubs = 2, Diamonds = 3 },
+
+	in_pool = folk_rankCheck,
+}
+
+SMODS.Rank:take_ownership( '9', {
+	next = { '10', 'folk_Bro' },
+	no_mod_badges = true
+})
+
+SMODS.Consumable{
+	key = 'councillor',
+	set = 'Tarot',
+	atlas = 'folk_Councillor', pos = { x = 0, y = 0 },
+	cost = 4,
+	config = {max_highlighted = 2},
+
+	set_card_type_badge = function(self, card, badges)
+        badges[1] = create_badge(G.localization.misc.dictionary.folk_etteilla, get_type_colour(self or card.config, card), nil, 1.2)
+    end,
+	loc_vars = function(self, info_queue)
+		info_queue[#info_queue+1] = {set = 'Other', key = 'm_folk_bro_desc', vars = {2}}
+        return {vars = {self.config.max_highlighted}}
+    end,
+
+	use = function(self, card)
+		G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+            play_sound('tarot1')
+            card:juice_up(0.3, 0.5)
+            return true end }))
+        for i=1, #G.hand.highlighted do
+            local percent = 1.15 - (i-0.999)/(#G.hand.highlighted-0.998)*0.3
+            G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() G.hand.highlighted[i]:flip();play_sound('card1', percent);G.hand.highlighted[i]:juice_up(0.3, 0.3);return true end }))
+        end
+        for i=1, #G.hand.highlighted do
+			G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.3,func = function() 
+                SMODS.change_base(G.hand.highlighted[i], nil, 'folk_Bro')
+			return true end}))
+        end
+        for i=1, #G.hand.highlighted do
+            local percent = 0.85 + (i-0.999)/(#G.hand.highlighted-0.998)*0.3
+            G.E_MANAGER:add_event(Event({trigger = 'after',delay = 0.15,func = function() G.hand.highlighted[i]:flip();play_sound('tarot2', percent, 0.6);G.hand.highlighted[i]:juice_up(0.3, 0.3);return true end }))
+        end
+        G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2,func = function() G.hand:unhighlight_all(); return true end }))
+        delay(0.5)
+	end
+}
+
+SMODS.Back{
+	key = 'recruit',
+	atlas = 'folk_Decks', pos = { x = 0, y = 0 },
+	unlocked = true,
+
+	config = {consumables = {'c_folk_councillor'}},
+    loc_vars = function(self)
+        return {vars = {}}
+    end,
+
+	apply = function(self)
+		G.E_MANAGER:add_event(Event({
+            func = function()
+				folk_setPoolRankFlagEnable('folk_Bro', true)
+                for v in pairs(G.playing_cards) do
+                    if G.playing_cards[v].base.value == '10' then 
+                        SMODS.change_base(G.playing_cards[v], nil, 'folk_Bro')
+                    end
+                end
+            return true
+            end
+        }))
+	end
+}
 ----------------------------------------------
 ------------MOD CODE END----------------------
 ----------------------------------------------
